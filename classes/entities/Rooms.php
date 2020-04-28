@@ -6,7 +6,7 @@ class Rooms extends \BlackFox\SCRUD {
 
 	public function Init() {
 		$this->name = 'Rooms';
-		$this->structure = [
+		$this->fields = [
 			'ID'    => self::ID,
 			'TITLE' => [
 				'TYPE'     => 'STRING',

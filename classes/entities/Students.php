@@ -6,7 +6,7 @@ class Students extends \BlackFox\SCRUD {
 
 	public function Init() {
 		$this->name = 'Students';
-		$this->structure = [
+		$this->fields = [
 			'ID'         => self::ID,
 			'FIRST_NAME' => [
 				'TYPE'  => 'STRING',
@@ -37,7 +37,7 @@ class Students extends \BlackFox\SCRUD {
 			$this->Create([
 				'FIRST_NAME' => $names[array_rand($names)],
 				'LAST_NAME'  => $lasts[array_rand($lasts)] . '.',
-				'GRADE'      => Grades::I()->Pick([], null, ['{RANDOM}' => 'ASC']),
+				'GRADE'      => Grades::I()->GetCell([], 'ID', ['{RANDOM}' => 'ASC']),
 			]);
 		}
 	}

@@ -18,10 +18,10 @@ class TestScrudExplainFields extends Test {
 	public function Test1A() {
 		$fields = $this->SCRUD->ExplainFields(['*']);
 		//debug(var_export($fields, true));
-		$awaits = array(
+		$awaits = [
 			'ID'       => 'ID',
-			'BOOL'     => 'BOOL',
-			'NUMBER'   => 'NUMBER',
+			'BOOLEAN'  => 'BOOLEAN',
+			'INTEGER'  => 'INTEGER',
 			'FLOAT'    => 'FLOAT',
 			'STRING'   => 'STRING',
 			'LINK'     => 'LINK',
@@ -32,7 +32,7 @@ class TestScrudExplainFields extends Test {
 			'ENUM'     => 'ENUM',
 			'SET'      => 'SET',
 			'FILE'     => 'FILE',
-		);
+		];
 		if ($fields <> $awaits) {
 			throw new Exception($fields);
 		}
@@ -42,10 +42,10 @@ class TestScrudExplainFields extends Test {
 	public function Test1V() {
 		$fields = $this->SCRUD->ExplainFields(['@']);
 		//debug(var_export($fields, true));
-		$awaits = array(
+		$awaits = [
 			'ID'     => 'ID',
 			'STRING' => 'STRING',
-		);
+		];
 		if ($fields <> $awaits) {
 			throw new Exception($fields);
 		}
@@ -55,16 +55,16 @@ class TestScrudExplainFields extends Test {
 	public function Test1A2A() {
 		$fields = $this->SCRUD->ExplainFields(['**']);
 		//debug(var_export($fields, true));
-		$awaits = array(
+		$awaits = [
 			'ID'       => 'ID',
-			'BOOL'     => 'BOOL',
-			'NUMBER'   => 'NUMBER',
+			'BOOLEAN'  => 'BOOLEAN',
+			'INTEGER'  => 'INTEGER',
 			'FLOAT'    => 'FLOAT',
 			'STRING'   => 'STRING',
-			'LINK'     => array(
+			'LINK'     => [
 				'ID'       => 'ID',
-				'BOOL'     => 'BOOL',
-				'NUMBER'   => 'NUMBER',
+				'BOOLEAN'  => 'BOOLEAN',
+				'INTEGER'  => 'INTEGER',
 				'FLOAT'    => 'FLOAT',
 				'STRING'   => 'STRING',
 				'LINK'     => 'LINK',
@@ -75,7 +75,7 @@ class TestScrudExplainFields extends Test {
 				'ENUM'     => 'ENUM',
 				'SET'      => 'SET',
 				'FILE'     => 'FILE',
-			),
+			],
 			'TEXT'     => 'TEXT',
 			'DATETIME' => 'DATETIME',
 			'TIME'     => 'TIME',
@@ -91,7 +91,7 @@ class TestScrudExplainFields extends Test {
 				'TYPE'        => 'TYPE',
 				'SRC'         => 'SRC',
 			],
-		);
+		];
 		if ($fields <> $awaits) {
 			throw new Exception($fields);
 		}
@@ -101,16 +101,16 @@ class TestScrudExplainFields extends Test {
 	public function Test1A2V() {
 		$fields = $this->SCRUD->ExplainFields(['*@']);
 		//debug(var_export($fields, true));
-		$awaits = array(
+		$awaits = [
 			'ID'       => 'ID',
-			'BOOL'     => 'BOOL',
-			'NUMBER'   => 'NUMBER',
+			'BOOLEAN'  => 'BOOLEAN',
+			'INTEGER'  => 'INTEGER',
 			'FLOAT'    => 'FLOAT',
 			'STRING'   => 'STRING',
-			'LINK'     => array(
+			'LINK'     => [
 				'ID'     => 'ID',
 				'STRING' => 'STRING',
-			),
+			],
 			'TEXT'     => 'TEXT',
 			'DATETIME' => 'DATETIME',
 			'TIME'     => 'TIME',
@@ -124,7 +124,7 @@ class TestScrudExplainFields extends Test {
 				'TYPE' => 'TYPE',
 				'SRC'  => 'SRC',
 			],
-		);
+		];
 		if ($fields <> $awaits) {
 			throw new Exception($fields);
 		}
@@ -134,21 +134,21 @@ class TestScrudExplainFields extends Test {
 	public function TestComplex() {
 		$fields = $this->SCRUD->ExplainFields([
 			'@',
-			'BOOL',
-			'LINK' => ['@', 'NUMBER', 'FILE'],
+			'BOOLEAN',
+			'LINK' => ['@', 'INTEGER', 'FILE'],
 		]);
 		//debug(var_export($fields, true));
-		$awaits = array(
-			'ID'     => 'ID',
-			'STRING' => 'STRING',
-			'BOOL'   => 'BOOL',
-			'LINK'   => array(
-				'ID'     => 'ID',
-				'STRING' => 'STRING',
-				'NUMBER' => 'NUMBER',
-				'FILE'   => 'FILE',
-			),
-		);
+		$awaits = [
+			'ID'      => 'ID',
+			'STRING'  => 'STRING',
+			'BOOLEAN' => 'BOOLEAN',
+			'LINK'    => [
+				'ID'      => 'ID',
+				'STRING'  => 'STRING',
+				'INTEGER' => 'INTEGER',
+				'FILE'    => 'FILE',
+			],
+		];
 		if ($fields <> $awaits) {
 			throw new Exception($fields);
 		}

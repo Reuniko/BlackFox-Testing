@@ -5,7 +5,7 @@ namespace Testing;
 class Timetable extends \BlackFox\SCRUD {
 	public function Init() {
 		$this->name = 'Timetable';
-		$this->structure = [
+		$this->fields = [
 			'ID'       => self::ID,
 			'ROOM'     => [
 				'TYPE'     => 'OUTER',
@@ -28,7 +28,7 @@ class Timetable extends \BlackFox\SCRUD {
 				'VITAL'    => true,
 			],
 			'DURATION' => [
-				'TYPE'     => 'NUMBER',
+				'TYPE'     => 'INTEGER',
 				'NAME'     => 'Duration (in hours)',
 				'NOT_NULL' => true,
 				'DEFAULT'  => 1,
@@ -39,8 +39,8 @@ class Timetable extends \BlackFox\SCRUD {
 	public function Fill($total) {
 		for ($i = 0; $i < $total; $i++) {
 			$this->Create([
-				'GRADE' => Grades::I()->Pick([], null, ['{RANDOM}' => 'ASC']),
-				'ROOM'  => Rooms::I()->Pick([], null, ['{RANDOM}' => 'ASC']),
+				'GRADE' => Grades::I()->GetCell([], 'ID', ['{RANDOM}' => 'ASC']),
+				'ROOM'  => Rooms::I()->GetCell([], 'ID', ['{RANDOM}' => 'ASC']),
 				'START' => time() + $i * 3600,
 			]);
 		}

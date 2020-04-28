@@ -6,7 +6,7 @@ class Grades extends \BlackFox\SCRUD {
 
 	public function Init() {
 		$this->name = 'Grades';
-		$this->structure = [
+		$this->fields = [
 			'ID'         => self::ID,
 			'TITLE'      => [
 				'TYPE'  => 'STRING',

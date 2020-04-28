@@ -6,14 +6,14 @@ class Table1 extends \BlackFox\SCRUD {
 
 	public function Init() {
 		$this->name = 'Table1';
-		$this->structure = [
+		$this->fields = [
 			'ID'       => self::ID,
-			'BOOL'     => [
-				'TYPE' => 'BOOL',
+			'BOOLEAN'     => [
+				'TYPE' => 'BOOLEAN',
 				'NAME' => 'Bool',
 			],
-			'NUMBER'   => [
-				'TYPE' => 'NUMBER',
+			'INTEGER'   => [
+				'TYPE' => 'INTEGER',
 				'NAME' => 'Number',
 			],
 			'FLOAT'    => [

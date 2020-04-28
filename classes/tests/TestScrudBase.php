@@ -37,8 +37,8 @@ class TestScrudBase extends Test {
 		$R = [];
 		for ($i = 0; $i < $this->limit; $i++) {
 			$R[] = $this->SCRUD->Create([
-				'BOOL'     => array_rand([true, false]),
-				'NUMBER'   => random_int(0, 99),
+				'BOOLEAN'  => array_rand([true, false]),
+				'INTEGER'  => random_int(0, 99),
 				'FLOAT'    => random_int(0, 99999) / random_int(1, 9),
 				'STRING'   => sha1(random_bytes(8)),
 				'LINK'     => @array_rand($R),
@@ -46,8 +46,8 @@ class TestScrudBase extends Test {
 				'DATETIME' => time() + random_int(-99999, 99999),
 				'TIME'     => random_int(0, 23) . ':' . random_int(0, 59),
 				'DATE'     => '+' . random_int(2, 90) . ' days',
-				'ENUM'     => array_rand($this->SCRUD->structure['ENUM']['VALUES']),
-				'SET'      => array_rand($this->SCRUD->structure['SET']['VALUES']),
+				'ENUM'     => array_rand($this->SCRUD->fields['ENUM']['VALUES']),
+				'SET'      => array_rand($this->SCRUD->fields['SET']['VALUES']),
 				'FILE'     => null,
 			]);
 		}
@@ -84,12 +84,12 @@ class TestScrudBase extends Test {
 	public function TestFilterByBool() {
 		foreach ([true, false] as $value) {
 			$elements = $this->SCRUD->Select([
-				'FILTER' => ['BOOL' => $value],
-				'FIELDS' => ['ID', 'BOOL'],
+				'FILTER' => ['BOOLEAN' => $value],
+				'FIELDS' => ['ID', 'BOOLEAN'],
 			]);
 			foreach ($elements as $id => $element) {
-				if ($element['BOOL'] <> $value) {
-					throw new Exception("Element #{$id}: value BOOL: {$value} <> {$element['BOOL']}");
+				if ($element['BOOLEAN'] <> $value) {
+					throw new Exception("Element #{$id}: value BOOLEAN: {$value} <> {$element['BOOLEAN']}");
 				}
 			}
 		}
@@ -100,12 +100,12 @@ class TestScrudBase extends Test {
 	public function TestFilterByNumber() {
 		$value = rand(0, 99);
 		$elements = $this->SCRUD->Select([
-			'FILTER' => ['NUMBER' => $value],
-			'FIELDS' => ['ID', 'NUMBER'],
+			'FILTER' => ['INTEGER' => $value],
+			'FIELDS' => ['ID', 'INTEGER'],
 		]);
 		foreach ($elements as $id => $element) {
-			if ($element['NUMBER'] <> $value) {
-				throw new Exception("Element #{$id}: value NUMBER <> {$value}");
+			if ($element['INTEGER'] <> $value) {
+				throw new Exception("Element #{$id}: value INTEGER <> {$value}");
 			}
 		}
 		return count($elements);
@@ -184,8 +184,8 @@ class TestScrudBase extends Test {
 	/** Count check */
 	public function TestCount() {
 		$count[1] = $this->SCRUD->Count([]);
-		$count[2] = $this->SCRUD->Count(['BOOL' => true]);
-		$count[3] = $this->SCRUD->Count(['BOOL' => false]);
+		$count[2] = $this->SCRUD->Count(['BOOLEAN' => true]);
+		$count[3] = $this->SCRUD->Count(['BOOLEAN' => false]);
 		if ($count[1] <> $count[2] + $count[3]) {
 			throw new Exception("Unexpected checksum");
 		}
