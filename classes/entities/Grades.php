@@ -19,16 +19,16 @@ class Grades extends \BlackFox\SCRUD {
 				'LINK' => 'Students',
 			],
 			'STUDENTS'   => [
-				'NAME'  => 'Students',
-				'TYPE'  => 'INNER',
-				'LINK'  => 'Students',
-				'FIELD' => 'GRADE',
+				'NAME'      => 'Students',
+				'TYPE'      => 'INNER',
+				'LINK'      => 'Students',
+				'INNER_KEY' => 'GRADE',
 			],
 			'TIMETABLES' => [
-				'NAME'  => 'Timetable',
-				'TYPE'  => 'INNER',
-				'LINK'  => 'Timetable',
-				'FIELD' => 'GRADE',
+				'NAME'      => 'Timetable',
+				'TYPE'      => 'INNER',
+				'LINK'      => 'Timetable',
+				'INNER_KEY' => 'GRADE',
 			],
 		];
 	}
