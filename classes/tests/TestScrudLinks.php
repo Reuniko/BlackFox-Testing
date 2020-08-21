@@ -22,6 +22,8 @@ class TestScrudLinks extends Test {
 		$this->Students = Students::I();
 	}
 
+	/*
+	// TODO make another test about Scheme
 	public function TestDrop() {
 		$this->Students->Drop();
 		$this->Timetable->Drop();
@@ -42,6 +44,7 @@ class TestScrudLinks extends Test {
 		$this->Timetable->CreateConstraints();
 		$this->Students->CreateConstraints();
 	}
+	*/
 
 	public function TestFillGrades() {
 		$this->Grades->Fill();
@@ -52,11 +55,11 @@ class TestScrudLinks extends Test {
 	}
 
 	public function TestFillTimetable() {
-		$this->Timetable->Fill(300);
+		$this->Timetable->Fill(50);
 	}
 
 	public function TestFillStudents() {
-		$this->Students->Fill(100);
+		$this->Students->Fill(50);
 	}
 
 	/** Test of reading a random element (student), checking the fields */

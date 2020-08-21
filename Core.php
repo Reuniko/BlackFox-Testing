@@ -3,24 +3,22 @@
 namespace Testing;
 
 class Core extends \BlackFox\ACore {
+
 	public $name = 'Testing';
 	public $description = 'A system module that provides testing tools and tests for core components';
 	public $version = '1.0';
 
+	public function GetScheme() {
+		return new \BlackFox\Scheme([
+			Grades::I(),
+			Rooms::I(),
+			Timetable::I(),
+			Students::I(),
+		]);
+	}
+
 	public function Upgrade() {
-
-		Grades::I()->DropConstraints();
-		Timetable::I()->DropConstraints();
-		Students::I()->DropConstraints();
-
-		Grades::I()->Synchronize();
-		Rooms::I()->Synchronize();
-		Timetable::I()->Synchronize();
-		Students::I()->Synchronize();
-
-		Grades::I()->CreateConstraints();
-		Timetable::I()->CreateConstraints();
-		Students::I()->CreateConstraints();
+		$this->GetScheme()->Synchronize();
 	}
 
 	public function Menu() {
