@@ -46,6 +46,22 @@ class TestScrudLinks extends Test {
 	}
 	*/
 
+	public function TestTruncateTimetable() {
+		$this->Timetable->Truncate();
+	}
+
+	public function TestTruncateStudents() {
+		$this->Students->Truncate();
+	}
+
+	public function TestDeleteGrades() {
+		$this->Grades->Delete();
+	}
+
+	public function TestDeleteRooms() {
+		$this->Rooms->Delete();
+	}
+
 	public function TestFillGrades() {
 		$this->Grades->Fill();
 	}
@@ -68,6 +84,9 @@ class TestScrudLinks extends Test {
 		if (!is_array($student)) {
 			throw new Exception('$student is not array');
 		}
+		if (empty($student)) {
+			throw new Exception(['$student is empty', $this->Students->SQL]);
+		}
 		if (array_keys($student) <> ['ID', 'FIRST_NAME', 'LAST_NAME', 'GRADE']) {
 			throw new Exception(['Wrong fields of $student', $student]);
 		}
@@ -82,6 +101,9 @@ class TestScrudLinks extends Test {
 		$grade = $this->Grades->Read([], ['*@'], ['{RANDOM}' => true]);
 		if (!is_array($grade)) {
 			throw new Exception('$grade is not array');
+		}
+		if (empty($grade)) {
+			throw new Exception(['$grade is empty', $this->Grades->SQL]);
 		}
 		if (array_keys($grade) <> ['ID', 'TITLE', 'CAPTAIN', 'STUDENTS', 'TIMETABLES']) {
 			throw new Exception(['Wrong fields of $grade', $grade]);
@@ -102,11 +124,14 @@ class TestScrudLinks extends Test {
 		if (!is_array($grade)) {
 			throw new Exception('$grade is not array');
 		}
+		if (empty($grade)) {
+			throw new Exception(['$grade is empty', $this->Grades->SQL]);
+		}
 		if (array_keys($grade) <> ['ID', 'TITLE', 'STUDENTS']) {
 			throw new Exception(['Wrong fields of $grade', $grade]);
 		}
 		if (array_keys(reset($grade['STUDENTS'])) <> ['ID', 'FIRST_NAME', 'LAST_NAME']) {
-			throw new Exception(['Wrong fields of $grade->STUDENTS', reset($grade['STUDENTS'])]);
+			throw new Exception(['Wrong fields of $grade->STUDENTS', $grade, $this->Grades->SQL]);
 		}
 		//return $grade;
 	}
@@ -158,6 +183,9 @@ class TestScrudLinks extends Test {
 	/** Test filter via chain: inverse link */
 	public function TestFilterGradesByStudents() {
 		$random_grade = $this->Grades->Read([], ['*@'], ['{RANDOM}' => ''], false);
+		if (empty($random_grade))
+			throw new Exception(['$random_grade is empty', $this->Grades->SQL]);
+
 		$random_student_first_name = $random_grade['STUDENTS'][array_rand($random_grade['STUDENTS'])]['FIRST_NAME'];
 
 		$grades = $this->Grades->Select([

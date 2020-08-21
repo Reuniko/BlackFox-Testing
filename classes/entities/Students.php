@@ -33,11 +33,12 @@ class Students extends \BlackFox\SCRUD {
 	public function Fill($total) {
 		$names = file(__DIR__ . '/data/names.txt', FILE_IGNORE_NEW_LINES);
 		$lasts = ['J', 'G', 'V', 'X', 'Z'];
+		$grades = array_values(Grades::I()->GetColumn());
 		for ($i = 0; $i < $total; $i++) {
 			$this->Create([
 				'FIRST_NAME' => $names[array_rand($names)],
 				'LAST_NAME'  => $lasts[array_rand($lasts)] . '.',
-				'GRADE'      => Grades::I()->GetCell([], 'ID', ['{RANDOM}' => 'ASC']),
+				'GRADE'      => next($grades) ?: reset($grades), //Grades::I()->GetCell([], 'ID', ['{RANDOM}' => 'ASC']),
 			]);
 		}
 	}
