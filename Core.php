@@ -10,6 +10,7 @@ class Core extends \BlackFox\ACore {
 
 	public function GetScheme() {
 		return new \BlackFox\Scheme([
+			Table1::I(),
 			Grades::I(),
 			Rooms::I(),
 			Timetable::I(),
