@@ -22,30 +22,6 @@ class TestScrudLinks extends Test {
 		$this->Students = Students::I();
 	}
 
-	/*
-	// TODO make another test about Scheme
-	public function TestDrop() {
-		$this->Students->Drop();
-		$this->Timetable->Drop();
-		$this->Rooms->Drop();
-		$this->Grades->Drop();
-	}
-
-	public function TestSynchronize() {
-		$this->Grades->Synchronize();
-		$this->Rooms->Synchronize();
-		$this->Timetable->Synchronize();
-		$this->Students->Synchronize();
-	}
-
-	public function TestCreateConstraints() {
-		$this->Grades->CreateConstraints();
-		$this->Rooms->CreateConstraints();
-		$this->Timetable->CreateConstraints();
-		$this->Students->CreateConstraints();
-	}
-	*/
-
 	public function TestTruncateTimetable() {
 		$this->Timetable->Truncate();
 	}
@@ -71,11 +47,11 @@ class TestScrudLinks extends Test {
 	}
 
 	public function TestFillTimetable() {
-		$this->Timetable->Fill(50);
+		$this->Timetable->Fill(2000);
 	}
 
 	public function TestFillStudents() {
-		$this->Students->Fill(50);
+		$this->Students->Fill(500);
 	}
 
 	/** Test of reading a random element (student), checking the fields */
@@ -275,23 +251,5 @@ class TestScrudLinks extends Test {
 			throw new Exception(["Timetable still exist", $random_timetable, $test]);
 		}
 	}
-
-	/** Renaming column: FIRST_NAME -> SECOND_NAME */
-	// TODO
-	/*
-	public function TestRenameColumn() {
-		$this->Students->fields['SECOND_NAME'] = $this->Students->fields['FIRST_NAME'];
-		$this->Students->fields['SECOND_NAME']['CHANGE'] = 'FIRST_NAME';
-		unset($this->Students->fields['FIRST_NAME']);
-		// $this->Students->ProvideIntegrity();
-		$this->Students->Synchronize();
-
-		$random_student = $this->Students->Read([], ['*'], ['{RANDOM}' => '']);
-		if (!array_key_exists('SECOND_NAME', $random_student)) {
-			throw new Exception(["No key SECOND_NAME", $random_student]);
-		}
-	}
-	*/
-
 
 }

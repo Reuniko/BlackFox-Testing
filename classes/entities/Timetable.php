@@ -37,13 +37,15 @@ class Timetable extends \BlackFox\SCRUD {
 	}
 
 	public function Fill($total) {
-		for ($i = 0; $i < $total; $i++) {
+		$this->Database->StartTransaction();
+		for ($i = 1; $i < $total; $i++) {
 			$this->Create([
 				'GRADE' => Grades::I()->GetCell([], 'ID', ['{RANDOM}' => 'ASC']),
 				'ROOM'  => Rooms::I()->GetCell([], 'ID', ['{RANDOM}' => 'ASC']),
 				'START' => time() + $i * 3600,
 			]);
 		}
+		$this->Database->Commit();
 	}
 }
 

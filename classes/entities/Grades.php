@@ -34,6 +34,7 @@ class Grades extends \BlackFox\SCRUD {
 	}
 
 	public function Fill() {
+		$this->Database->StartTransaction();
 		foreach (['A', 'B', 'C'] as $class_letter) {
 			foreach ([1, 2, 3, 4, 5, 7, 8, 9, 10, 11] as $class_number) {
 				$this->Create([
@@ -42,5 +43,6 @@ class Grades extends \BlackFox\SCRUD {
 				]);
 			}
 		}
+		$this->Database->Commit();
 	}
 }
