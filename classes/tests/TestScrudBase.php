@@ -35,6 +35,7 @@ class TestScrudBase extends Test {
 	 */
 	public function TestCreateRandomRows() {
 		$R = [];
+		$this->SCRUD->Database->StartTransaction();
 		for ($i = 0; $i < $this->limit; $i++) {
 			$R[] = $this->SCRUD->Create([
 				'BOOLEAN'  => array_rand([true, false]),
@@ -51,6 +52,7 @@ class TestScrudBase extends Test {
 				'FILE'     => null,
 			]);
 		}
+		$this->SCRUD->Database->Commit();
 		return $i;
 	}
 

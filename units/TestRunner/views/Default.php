@@ -9,7 +9,7 @@
 			name="ACTION"
 			value="RunAll"
 		>
-			<i class="fa fa-play"></i>
+			<span class="material-icons">play_arrow</span>
 			<?= T([
 				'en' => 'Run all tests',
 				'ru' => 'Запустить все тесты',
@@ -23,8 +23,8 @@
 		'FAILURE' => 'alert-danger',
 	];
 	$status2icon = [
-		'SUCCESS' => 'fa fa-check',
-		'FAILURE' => 'fa fa-times',
+		'SUCCESS' => 'check_circle_outline',
+		'FAILURE' => 'error_outline',
 	];
 	?>
 
@@ -38,7 +38,7 @@
 						class="btn btn-sm btn-secondary"
 						name="ACTION"
 						value="RunOne"
-					><i class="fa fa-play"></i></button>
+					><span class="material-icons">play_arrow</span></button>
 					<input
 						type="hidden"
 						name="TEST_CLASS_NAME"
@@ -61,7 +61,7 @@
 
 							<div class="col-1">
 								<div class="alert alert-sm alert-warning">
-									<i class="far fa-hourglass"></i>
+									<span class="material-icons">hourglass_empty</span>
 									<? if ($test_method_result['TIME'] > 5): ?>
 										<strong><?= $test_method_result['TIME'] ?></strong>
 									<? else: ?>
@@ -72,7 +72,7 @@
 
 							<div class="col">
 								<div class="alert alert-sm <?= $status2alert[$test_method_result['STATUS']] ?> limit">
-									<i class="<?= $status2icon[$test_method_result['STATUS']] ?>"></i>
+									<span class="material-icons"><?= $status2icon[$test_method_result['STATUS']] ?></span>
 									<? if (!empty($test_method_result['RESULT'])): ?>
 										<? if (is_array($test_method_result['RESULT'])): ?>
 											<pre><?= print_r($test_method_result['RESULT'], true) ?></pre>
